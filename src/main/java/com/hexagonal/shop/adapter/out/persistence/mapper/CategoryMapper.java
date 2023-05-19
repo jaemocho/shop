@@ -1,0 +1,49 @@
+package com.hexagonal.shop.adapter.out.persistence.mapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.hexagonal.shop.adapter.out.persistence.entity.CategoryEntity;
+import com.hexagonal.shop.domain.Category;
+
+@Component
+public class CategoryMapper implements DomainEntityMapper {
+    
+    public List<CategoryEntity> domainToEntity(List<Category> categories) {
+        List<CategoryEntity> categoryEntities = new ArrayList<CategoryEntity>();
+        for(Category c : categories) {
+            categoryEntities.add(domainToEntity(c));
+        }
+        return categoryEntities;   
+    }
+
+    public CategoryEntity domainToEntity(Category category) {
+        if ( category == null ) {
+            return null;
+        }
+        return CategoryEntity.builder()
+                            .id(category.getId())
+                            .name(category.getName())
+                            .build();
+    }
+
+    public List<Category> entityToDomain(List<CategoryEntity> categoryEntities)  {
+        List<Category> categories = new ArrayList<Category>();
+        for(CategoryEntity c : categoryEntities) {
+            categories.add(entityToDomain(c));
+        }
+        return categories;
+    }
+
+    public Category entityToDomain(CategoryEntity categoryEntity) {
+        if( categoryEntity == null ) {
+            return null;
+        }
+        return Category.builder()
+                    .id(categoryEntity.getId())
+                    .name(categoryEntity.getName())
+                    .build();
+    }
+}
