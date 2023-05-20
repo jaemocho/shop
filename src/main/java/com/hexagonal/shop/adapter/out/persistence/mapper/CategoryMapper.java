@@ -9,7 +9,7 @@ import com.hexagonal.shop.adapter.out.persistence.entity.CategoryEntity;
 import com.hexagonal.shop.domain.Category;
 
 @Component
-public class CategoryMapper implements DomainEntityMapper {
+public class CategoryMapper implements DomainEntityMapper<Category,CategoryEntity> {
     
     public List<CategoryEntity> domainToEntity(List<Category> categories) {
         List<CategoryEntity> categoryEntities = new ArrayList<CategoryEntity>();

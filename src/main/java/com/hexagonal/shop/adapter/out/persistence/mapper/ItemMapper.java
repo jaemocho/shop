@@ -5,16 +5,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.hexagonal.shop.adapter.out.persistence.entity.CategoryEntity;
 import com.hexagonal.shop.adapter.out.persistence.entity.ItemEntity;
+import com.hexagonal.shop.domain.Category;
 import com.hexagonal.shop.domain.Item;
 
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class ItemMapper {
+public class ItemMapper implements DomainEntityMapper<Item,ItemEntity>{
 
-    private final CategoryMapper categoryMapper;
+    private final DomainEntityMapper<Category, CategoryEntity> categoryMapper;
 
     public List<ItemEntity> domainToEntity(List<Item> items) {
         List<ItemEntity> itemEntities = new ArrayList<ItemEntity>();

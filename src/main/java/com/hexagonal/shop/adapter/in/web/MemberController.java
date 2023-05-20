@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hexagonal.shop.adapter.in.web.dto.ReqMemberDto;
-import com.hexagonal.shop.adapter.in.web.dto.RespMemberDto;
 import com.hexagonal.shop.application.port.in.MemberUsecase;
+import com.hexagonal.shop.application.service.dto.ReqMemberDto;
+import com.hexagonal.shop.application.service.dto.RespMemberDto;
 import com.hexagonal.shop.common.exception.ShopException;
 
 import jakarta.validation.Valid;

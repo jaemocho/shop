@@ -1,4 +1,4 @@
-package com.hexagonal.shop.adapter.in.web.dto;
+package com.hexagonal.shop.application.service.dto;
 
 import lombok.Builder;
 import lombok.Getter;

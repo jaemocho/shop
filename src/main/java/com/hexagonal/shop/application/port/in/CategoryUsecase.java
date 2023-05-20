@@ -2,8 +2,8 @@ package com.hexagonal.shop.application.port.in;
 
 import java.util.List;
 
-import com.hexagonal.shop.adapter.in.web.dto.ReqCategoryDto;
-import com.hexagonal.shop.adapter.in.web.dto.RespCategoryDto;
+import com.hexagonal.shop.application.service.dto.ReqCategoryDto;
+import com.hexagonal.shop.application.service.dto.RespCategoryDto;
 import com.hexagonal.shop.common.exception.ShopException;
 
 public interface CategoryUsecase {

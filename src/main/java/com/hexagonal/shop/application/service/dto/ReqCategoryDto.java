@@ -1,4 +1,4 @@
-package com.hexagonal.shop.adapter.in.web.dto;
+package com.hexagonal.shop.application.service.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

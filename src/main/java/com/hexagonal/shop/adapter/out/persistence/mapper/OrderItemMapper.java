@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.hexagonal.shop.adapter.out.persistence.entity.ItemEntity;
 import com.hexagonal.shop.adapter.out.persistence.entity.OrderEntity;
 import com.hexagonal.shop.adapter.out.persistence.entity.OrderItemEntity;
+import com.hexagonal.shop.domain.Item;
 import com.hexagonal.shop.domain.Order;
 import com.hexagonal.shop.domain.OrderItem;
 
@@ -16,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderItemMapper implements DomainEntityMapper<OrderItem,OrderItemEntity> {
 
-    private final ItemMapper imtemMapper;
+    private final DomainEntityMapper<Item,ItemEntity> imtemMapper;
 
     public List<OrderItemEntity> domainToEntity(List<OrderItem> orderItems) {
         List<OrderItemEntity> orderItemEntities = new ArrayList<OrderItemEntity>();
