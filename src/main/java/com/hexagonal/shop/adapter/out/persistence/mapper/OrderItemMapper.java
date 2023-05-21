@@ -6,10 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.hexagonal.shop.adapter.out.persistence.entity.ItemEntity;
-import com.hexagonal.shop.adapter.out.persistence.entity.OrderEntity;
 import com.hexagonal.shop.adapter.out.persistence.entity.OrderItemEntity;
 import com.hexagonal.shop.domain.Item;
-import com.hexagonal.shop.domain.Order;
 import com.hexagonal.shop.domain.OrderItem;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderItemMapper implements DomainEntityMapper<OrderItem,OrderItemEntity> {
 
-    private final DomainEntityMapper<Item,ItemEntity> imtemMapper;
+    private final DomainEntityMapper<Item,ItemEntity> itemMapper;
 
     public List<OrderItemEntity> domainToEntity(List<OrderItem> orderItems) {
         List<OrderItemEntity> orderItemEntities = new ArrayList<OrderItemEntity>();
@@ -34,8 +32,7 @@ public class OrderItemMapper implements DomainEntityMapper<OrderItem,OrderItemEn
         }
         return OrderItemEntity.builder()
                             .id(orderItem.getId())
-                            .itemEntity(imtemMapper.domainToEntity(orderItem.getItem()))
-                            .orderEntity(createNewOrderEntity(orderItem))
+                            .itemEntity(itemMapper.domainToEntity(orderItem.getItem()))
                             .count(orderItem.getCount())
                             .build();
     }
@@ -54,26 +51,8 @@ public class OrderItemMapper implements DomainEntityMapper<OrderItem,OrderItemEn
         }
         return OrderItem.builder()
                     .id(orderItemEntity.getId())
-                    .item(imtemMapper.entityToDomain(orderItemEntity.getItemEntity()))
-                    .order(createNewOrder(orderItemEntity))
+                    .item(itemMapper.entityToDomain(orderItemEntity.getItemEntity()))
                     .count(orderItemEntity.getCount())
-                    .build();
-                            
-    }
-
-    private Order createNewOrder(OrderItemEntity orderItemEntity) {
-        Long orderId = orderItemEntity.getOrderEntity().getId();
-        if (orderId == null) return null;
-        return Order.builder()
-                    .id(orderId)
-                    .build();
-    }
-
-    private OrderEntity createNewOrderEntity(OrderItem orderItem) {
-        Long orderId = orderItem.getOrder().getId();
-        if(orderId == null) return null;
-        return OrderEntity.builder()
-                        .id(orderId)
-                        .build();
+                    .build();                       
     }
 }

@@ -34,14 +34,21 @@ public class OrderMapper implements DomainEntityMapper<Order, OrderEntity> {
         if (order == null ){
             return null;
         }
-        return OrderEntity.builder()
+        OrderEntity orderEntity =  OrderEntity.builder()
                             .id(order.getId())
                             .memberEntity(memberMapper.domainToEntity(order.getMember()))
-                            .orderItemEntities(orderItemMapper.domainToEntity(order.getOrderItems()))
                             .orderDate(order.getOrderDate())
                             .orderState(order.getOrderState())
                             .build();
-                            
+
+        setOrderEntitis(orderEntity, order.getOrderItems());
+        return orderEntity;
+    }
+
+    private void setOrderEntitis(OrderEntity orderEntity, List<OrderItem> orderItems) {
+        for(OrderItem oi : orderItems) {
+            orderEntity.addOrderItemEntities(orderItemMapper.domainToEntity(oi));
+        }
     }
 
     public List<Order> entityToDomain(List<OrderEntity> orderEntities) {

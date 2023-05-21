@@ -47,9 +47,8 @@ public class OrderService implements OrderUsecase {
         
         Order order = createNewOrder();
         order.setMember(orderMember);
-        order = orderPersistencePort.save(order);
-        
         addOrderItemToOrder(reqOrderDto, order);
+        order = orderPersistencePort.save(order);
         return order.getId();
     }
 
@@ -128,8 +127,7 @@ public class OrderService implements OrderUsecase {
     }
 
     private void setOrderToOrderItem(OrderItem orderItem, Order order) {
-        orderItem.setOrder(order);
-        orderItemPersistencePort.save(orderItem);
+        order.addOrderItems(orderItem);
     }
 
     private OrderItem createOrderItem(Item item, int requestQty) {

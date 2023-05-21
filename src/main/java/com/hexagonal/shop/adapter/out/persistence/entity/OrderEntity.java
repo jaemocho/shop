@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.hexagonal.shop.common.ShopConstants.OrderState;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -51,7 +52,7 @@ public class OrderEntity {
     }
 
     @Builder.Default
-    @OneToMany(mappedBy = "orderEntity")
+    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.PERSIST)
     private List<OrderItemEntity> orderItemEntities = new ArrayList<OrderItemEntity>();
     
     
